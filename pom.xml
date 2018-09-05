@@ -38,6 +38,16 @@
             <artifactId>hadoop-mini-clusters-hiveserver2</artifactId>
             <version>0.1.14</version>
         </dependency>
+        <dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-core</artifactId>
+            <version>5.1.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-api-jdo</artifactId>
+            <version>5.1.9</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -45,17 +55,21 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.1.0</version>
                 <configuration>
-                    <descriptor>src/assembly/dep.xml</descriptor>
+                    <descriptorRefs>
+                      <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
                     <finalName>minicluster-${pom.version}</finalName>
                 </configuration>
                 <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
+                  <execution>
+                    <id>make-assembly</id> <!-- this is used for inheritance merges -->
+                    <phase>package</phase> <!-- bind to the packaging phase -->
+                    <goals>
+                      <goal>single</goal>
+                    </goals>
+                  </execution>
                 </executions>
             </plugin>
         </plugins>

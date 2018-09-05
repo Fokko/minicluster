@@ -13,8 +13,6 @@ FROM openjdk:8-jre
 
 EXPOSE 10000 9083 8020 50700
 
-COPY --from=0 /app/target/minicluster-1.0-SNAPSHOT-bin.tar.gz .
+COPY --from=0 /app/target/minicluster-1.0-SNAPSHOT-jar-with-dependencies.jar .
 
-RUN tar -zxvf minicluster-1.0-SNAPSHOT-bin.tar.gz
-
-ENTRYPOINT ["java", "-cp", "minicluster-1.0-SNAPSHOT/*", "com.ing.minicluster.MiniCluster"]
+ENTRYPOINT ["java", "-cp", "minicluster-1.0-SNAPSHOT-jar-with-dependencies.jar", "com.ing.minicluster.MiniCluster"]
